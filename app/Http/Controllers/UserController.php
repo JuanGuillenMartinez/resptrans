@@ -20,6 +20,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'job_title' => $request->job_title,
             'password' => bcrypt($request->password),
         ]);
         $user->assignRole(Role::find($request->rol_id));
