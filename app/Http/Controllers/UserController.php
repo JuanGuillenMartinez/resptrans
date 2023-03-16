@@ -32,6 +32,19 @@ class UserController extends Controller
         return JsonResponse::sendResponse(User::query()->find($id));
     }
 
+    public function update(Request $request)
+    {
+        $user = User::query()->updateOrCreate(
+            ['email' => $request->email],
+            [
+                'name' => $request->name,
+                'job_title' => $request->job_title,
+                'password' => bcrypt($request->password)
+            ]
+        );
+        return JsonResponse::sendResponse($user);
+    }
+
     public function destroy($id)
     {
         return JsonResponse::sendResponse(User::find($id)->delete());
